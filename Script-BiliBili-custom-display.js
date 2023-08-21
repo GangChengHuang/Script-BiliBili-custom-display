@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         BiliBili界面高自由度自定义显示
 // @namespace    https://github.com/GangChengHuang
-// @version      1.1
+// @version      1.2
 // @description  BiliBili页面自由定制-主打一个简洁
 // @author       Peterg
 // @match        https://*.bilibili.com/*
@@ -19,7 +19,7 @@
     var headerMenuLinks = ['首页', '番剧', '直播', '游戏中心', '会员购', '漫画', '赛事', '下载客户端', '大会员', '消息', '动态', '收藏', '历史', '创作中心'];
     var videoElevators = ['推广', '知识', '游戏', '科技', '运动', '汽车', '生活', '动画', '舞蹈', '音乐', '漫画', '综艺', '国创', '国产原创相关', '番剧', '番剧动态', '课堂', '直播', '美食', '动物圈', '鬼畜', '时尚', '资讯', '娱乐', '专栏', '电影', '电视剧', '影视', '纪录片', '赛事'];
     var channelParts = ['动态', '热门', '频道', '番剧', '电影', '国创', '电视剧', '综艺', '纪录片', '动画', '游戏', '鬼畜', '音乐', '舞蹈', '影视', '娱乐', '知识', '科技', '资讯', '美食', '更多', '生活', '汽车', '时尚', '运动', '动物圈', 'VLOG', '搞笑', '单机游戏', '虚拟UP主', '公益', '公开课', '专栏', '直播', '活动', '课堂', '社区中心', '新歌热榜'];
-    var adtexts = ['视频排行榜', '视频热门', '横幅广告', '视频右侧/底部广告', '视频推荐游戏/课程', 'bilibili热搜', '页脚网站信息', '空间假装大会员'];
+    var adtexts = ['视频排行榜', '视频热门', '横幅广告', '视频右侧/底部广告', '视频推荐游戏/课程', '视频下方投稿活动', 'bilibili热搜', '页脚网站信息', '空间假装大会员'];
     var videoset = ['解锁3倍速', '解锁4倍速'];
     function setOther(adtexts) {
         if (!GM_getValue('other-' + adtexts[0], false)) {
@@ -46,12 +46,15 @@
             setClassDisplayNone(['video-page-game-card-small', 'video-page-special-card-small']);
         }
         if (!GM_getValue('other-' + adtexts[5], false)) {
-            setClassDisplayNone(['trending']);
+            setClassDisplayNone(['activity-m-v1']);
         }
         if (!GM_getValue('other-' + adtexts[6], false)) {
+            setClassDisplayNone(['trending']);
+        }
+        if (!GM_getValue('other-' + adtexts[7], false)) {
             setClassDisplayNone(['bili-footer']);
         }
-        if (GM_getValue('other-' + adtexts[7], false)) {
+        if (GM_getValue('other-' + adtexts[8], false)) {
             const viptype = document.querySelector("div.h-vipType.disable");
             if (viptype) {
                 viptype.outerHTML = `<div class="h-viplabel"><img src="//i0.hdslb.com/bfs/vip/8d4f8bfc713826a5412a0a27eaaac4d6b9ede1d9.png@1c.webp"></div>`;
@@ -171,7 +174,7 @@
     }
     function pageMutation() {
         var targetNode = document.querySelector("body");
-        var config = { attributes: true, childList: true, subtree: true };
+        var config = { attributes: false, childList: true, subtree: false };
         var callback = function (mutationsList) {
             mutationsList.forEach(function (item, index) {
                 removeCarousel();
