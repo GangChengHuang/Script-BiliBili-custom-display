@@ -1,5 +1,8 @@
 # Script-BiliBili-custom-display
 - bilibili界面优化&&屏蔽广告&&私人定制&&视频倍速
+- 使用旧版网页效果更好（右下角退出内测）
+- ![image](https://github.com/GangChengHuang/Script-BiliBili-custom-display/assets/138220034/6ece241f-258b-4a39-9258-1e025113f15f)
+
 ## 功能介绍
 - 自定义显示顶部链接
 - 自定义显示中上视频区
